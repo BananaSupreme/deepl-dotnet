@@ -10,7 +10,7 @@ namespace DeepL.Extensions.DependencyInjection;
 public static class ServiceCollectionExtensions {
   public static IServiceCollection AddDeepL(
     this IServiceCollection services,
-    Action<TranslatorOptions>? translatorOptionsAction = null,
+    Action<TranslatorOptions> translatorOptionsAction,
     Action<DeepLDependencyInjectionOptions>? dependencyInjectionOptionsAction = null,
     Action<IHttpClientBuilder>? clientBuilderAction = null) {
 
@@ -29,7 +29,7 @@ public static class ServiceCollectionExtensions {
     });
 
     var translatorOptions = new TranslatorOptions();
-    translatorOptionsAction?.Invoke(translatorOptions);
+    translatorOptionsAction.Invoke(translatorOptions);
 
     services.Configure<TranslatorOptions>(options => {
       translatorOptionsAction?.Invoke(options);
